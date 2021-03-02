@@ -1,44 +1,40 @@
 <template>
   <div class="home">
-    Home
-    <p ref="p">My name is {{ name }} and my age is {{ age }}</p>
-    <button @click="handleClick">Click Me</button>
-    <button @click="age++">Get Older</button>
-    <input type="text" v-model="name" >
+    <h1>Home</h1>
+    <input type="text" v-model="search" />
+    <p>Search Term - {{ search }}</p>
+    <div v-for="name in matchingNames" :key="name">{{ name }}</div>
+    <button @click="handleClick">Stop Watching</button>
   </div>
 </template>
 
 <script>
-import { ref, computed } from 'vue'
+import { ref, computed, watch, watchEffect } from 'vue'
 
 export default {
   name: 'Home',
   setup () {
+    const search = ref('')
+    const names = ref(['mario', 'yoshi', 'luigi', 'toad', 'bowser', 'koopa', 'peach'])
 
+    const stopWatch = watch(search, () => {
+      console.log('Watch function ran')
+    })
 
+    const stopEffect = watchEffect(() => {
+      console.log('WatchEffect function ran'), search.value
+    })
 
-    console.log('SETUP')
-    const name = ref('Sebastian')
-    const age = ref(36)
-
-    const p = ref(null)
+    const matchingNames = computed(() => {
+      return names.value.filter(name => name.includes(search.value))
+    })
 
     const handleClick = () => {
-      name.value = 'Imposter'
+      stopWatch()
+      stopEffect()
     }
 
-    return {
-      name,
-      age,
-      handleClick,
-      p,
-    }
+    return { names, search, matchingNames }
   },
-  created () {
-    console.log('CREATED')
-  },
-  mounted () {
-    console.log('MOUNTED')
-  }
 }
 </script>
