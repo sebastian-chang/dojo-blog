@@ -1,40 +1,45 @@
 <template>
   <div class="home">
     <h1>Home</h1>
-    <input type="text" v-model="search" />
-    <p>Search Term - {{ search }}</p>
-    <div v-for="name in matchingNames" :key="name">{{ name }}</div>
-    <button @click="handleClick">Stop Watching</button>
+    <div v-if="error">{{ error }}</div>
+    <div v-if="posts.length" class="layout">
+      <PostList :posts="posts" />
+      <TagCloud :posts="posts" />
+    </div>
+    <div v-else>
+      <Spinner />
+    </div>
   </div>
 </template>
 
 <script>
-import { ref, computed, watch, watchEffect } from 'vue'
+import PostList from '../components/PostList'
+import getPosts from '../composables/getPosts'
+import Spinner from '../components/Spinner'
+import TagCloud from '../components/TagCloud'
 
 export default {
   name: 'Home',
+  components: { PostList, Spinner, TagCloud },
   setup () {
-    const search = ref('')
-    const names = ref(['mario', 'yoshi', 'luigi', 'toad', 'bowser', 'koopa', 'peach'])
+    const { posts, error, load } = getPosts()
 
-    const stopWatch = watch(search, () => {
-      console.log('Watch function ran')
-    })
-
-    const stopEffect = watchEffect(() => {
-      console.log('WatchEffect function ran'), search.value
-    })
-
-    const matchingNames = computed(() => {
-      return names.value.filter(name => name.includes(search.value))
-    })
-
-    const handleClick = () => {
-      stopWatch()
-      stopEffect()
-    }
-
-    return { names, search, matchingNames }
+    load()
+    console.log('home', posts)
+    return { posts, error }
   },
 }
 </script>
+
+<style>
+.home {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px;
+}
+.layout {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 20px;
+}
+</style>

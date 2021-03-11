@@ -1,0 +1,69 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "welcome to the new blog",
+      "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "tags": [
+        "webdev",
+        "coding",
+        "news"
+      ]
+    },
+    {
+      "id": 2,
+      "title": "top 5 CSS tips",
+      "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "tags": [
+        "css",
+        "webdev",
+        "coding"
+      ]
+    },
+    {
+      "title": "Ugh",
+      "body": "I have to write this again",
+      "tags": [
+        "fail",
+        "whoops"
+      ],
+      "id": 3
+    },
+    {
+      "title": "Web Developer",
+      "body": "Build stuff for people to see third time",
+      "tags": [
+        "css",
+        "html",
+        "javascript"
+      ],
+      "id": 7
+    },
+    {
+      "title": "Work",
+      "body": "???",
+      "tags": [
+        "testing"
+      ],
+      "id": 8
+    },
+    {
+      "title": "Full walkthrough",
+      "body": "Okay this should work",
+      "tags": [
+        "debugging",
+        "vue",
+        "router"
+      ],
+      "id": 9
+    },
+    {
+      "title": "asdfaa",
+      "body": "sdfasdfa",
+      "tags": [
+        "asdfa"
+      ],
+      "id": 10
+    }
+  ]
+}
