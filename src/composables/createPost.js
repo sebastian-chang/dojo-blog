@@ -1,18 +1,11 @@
+import { projectFirestore } from "../firebase/config"
+
 const createPost = () => {
-  const load = async post => {
-    try {
-      await fetch('http://localhost:3000/posts', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(post)
-      })
-    }
-    catch (err) {
-      console.error(err)
-    }
+  const create = async post => {
+    const res = await projectFirestore.collection('posts').add(post)
   }
 
-  return { load }
+  return { create }
 }
 
 export default createPost

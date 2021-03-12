@@ -18,6 +18,7 @@ import { ref } from '@vue/reactivity'
 import { useRouter } from 'vue-router'
 
 import CreatePost from '../composables/createPost'
+import { timeStamp } from '../firebase/config'
 
 export default {
   setup () {
@@ -36,17 +37,18 @@ export default {
       tag.value = ''
     }
 
-    const { load } = CreatePost()
+    const { create } = CreatePost()
 
     const onHandleSubmit = async () => {
       const post = {
         title: title.value,
         body: body.value,
-        tags: tags.value
+        tags: tags.value,
+        createdAt: timeStamp(),
       }
-      load(post)
+      create(post)
 
-      router.push({name: 'Home'})
+      router.push({ name: 'Home' })
     }
 
     return { title, body, tag, tags, handleKeydown, onHandleSubmit }
